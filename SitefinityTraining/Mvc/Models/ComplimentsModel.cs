@@ -9,8 +9,10 @@ namespace SitefinityWebApp.Mvc.Models
     {
         private string _compliments;
 
-        public string Compliments {
-            get {
+        public string Compliments
+        {
+            get
+            {
                 return _compliments;
             }
             set
@@ -18,12 +20,12 @@ namespace SitefinityWebApp.Mvc.Models
                 _compliments = value;
             }
         }
-        
-        private string[] _complimentsArray => _compliments.Split(',').Select(_compliments => _compliments.Trim()).ToArray();
+
+        private string[] _complimentsArray => _compliments.Split(',').Select(c => c.Trim()).ToArray();
 
         public ComplimentsModel()
         {
-            _compliments = "You are as cool as you think";
+            _compliments = "You ARE as cool as you think";
         }
         public ComplimentsModel(string compliments)
         {
@@ -31,6 +33,8 @@ namespace SitefinityWebApp.Mvc.Models
         }
         public string ComplimentMe()
         {
+            if (String.IsNullOrEmpty(_compliments))
+                return "Default Compliment";
             Random rnd = new Random();
             int r = rnd.Next(_complimentsArray.Count());
             return _complimentsArray[r];
