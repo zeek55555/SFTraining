@@ -12,11 +12,12 @@ namespace SitefinityWebApp.Mvc.Controllers
     public class ComplimentsController : Controller
     {
         public string Compliments { get; set; }
+        public bool AllowInsults { get; set; }
 
         public ActionResult Index()
         {
             //ViewBag.MyCompliments = Compliments;
-            var model = new ComplimentsModel(Compliments);
+            var model = new ComplimentsModel(Compliments, AllowInsults);
             return View(model);
         }
     }
