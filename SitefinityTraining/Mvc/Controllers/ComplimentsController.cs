@@ -16,7 +16,7 @@ namespace SitefinityWebApp.Mvc.Controllers
 
         public ActionResult Index()
         {
-            //ViewBag.MyCompliments = Compliments;
+            ViewBag.MyCompliments = Compliments;
             var model = new ComplimentsModel(Compliments, AllowInsults);
             return View(model);
         }
