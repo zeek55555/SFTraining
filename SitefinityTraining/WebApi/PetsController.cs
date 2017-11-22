@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Http;
+using Telerik.Sitefinity;
 using Telerik.Sitefinity.DynamicModules;
 using Telerik.Sitefinity.DynamicModules.Model;
 using Telerik.Sitefinity.Model;
@@ -15,6 +16,10 @@ namespace SitefinityWebApp.WebApi
     public class Pet
     {
         private DynamicContent dynamicContent;
+
+        public Pet()
+        {
+        }
 
         public Pet(DynamicContent dynamicContent)
         {
@@ -42,7 +47,7 @@ namespace SitefinityWebApp.WebApi
             {
                 DynamicModuleManager dynamicModuleManager = DynamicModuleManager.GetManager();
                 Type petType = TypeResolutionService.ResolveType("Telerik.Sitefinity.DynamicTypes.Model.Pets.Pet");
-
+                
                 // This is how we get the collection of Pet items
                 var myCollection = dynamicModuleManager.GetDataItems(petType).Where(d => d.Status == Telerik.Sitefinity.GenericContent.Model.ContentLifecycleStatus.Live && d.Visible);
                 return myCollection;
@@ -95,9 +100,16 @@ namespace SitefinityWebApp.WebApi
         //}
 
         //[HttpGet]   //api/pets/getbynameandage?name=Bob&age=2
+
         //public Pet GetByNameAndAge(string name, int age)
         //{
         //    return Pets.Where(p => p.Name.ToUpper() == name.ToUpper() && p.Age == age).FirstOrDefault();
         //}
+        
+        [HttpPost]
+        public Pet Post([FromBody] Pet pet)
+        {
+            return new Pet();
+        }
     }
 }
