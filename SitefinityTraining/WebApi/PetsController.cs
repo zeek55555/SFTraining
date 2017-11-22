@@ -87,10 +87,11 @@ namespace SitefinityWebApp.WebApi
         }
 
         [HttpGet]
-        public Pet Get(int id)
+        public Pet Get(Guid id)//(int id)
         {
-            //return Pets.Where(p => p.Id == id).FirstOrDefault();
-            return new Pet(Pets.FirstOrDefault());
+            var pet = Pets.Where(p => p.Id == id).FirstOrDefault();
+            //return new Pet(Pets.FirstOrDefault());
+            return new Pet(pet);
         }
 
         //[HttpGet]
